@@ -158,6 +158,10 @@ draw_set_halign(fa_right);
 draw_text(window_get_width()-10,30,"DISTANCE: " + string(global.distance));
 draw_text(window_get_width()-10,60,"SPEED: " + string(o_floor_spawner.hsp));
 
+if instance_exists(o_obstacle_spawner){
+    draw_text(window_get_width()-10,90,"SPAWN: " + string(o_obstacle_spawner.alarm[0]));
+}
+
 </string>
           </argument>
         </arguments>

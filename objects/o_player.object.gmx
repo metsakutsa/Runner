@@ -27,6 +27,12 @@
             <kind>1</kind>
             <string>/// Initialize variables
 
+//Optimal position
+default_position = 48
+x = default_position;
+//Position correction
+x_corr = 0.1;
+
 //Gravity and max
 g = 0.4;
 g_max = 10;
@@ -37,6 +43,9 @@ vsp = 0;
 
 //Jumping speed
 jump_speed = 7;
+
+//Collision flag
+colliding = false;
 </string>
           </argument>
         </arguments>
@@ -60,11 +69,22 @@ jump_speed = 7;
           <argument>
             <kind>1</kind>
             <string>///Game over?
-if (y &gt; room_height+100){
+
+//Dropped to demise
+if (bbox_top &gt; window_get_height()){
     if global.game_state != "GAMEOVER"{
         state_change("GAMEOVER");
     }
 }
+
+//Pushed out of screen
+if (bbox_right &lt; 0){
+    if global.game_state != "GAMEOVER"{
+        state_change("GAMEOVER");
+    }
+}
+
+
 </string>
           </argument>
         </arguments>
@@ -103,6 +123,42 @@ if global.game_state == "PLAYING"{
         vsp = 0;
     }
     y += vsp;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Obstacle collision and reset from collision
+
+if place_meeting(bbox_right+1,y,o_obstacle){
+    colliding = true;
+    x = o_obstacle.x-32;
+    x -= o_floor_spawner.hsp;
+} else colliding = false;
+
+if !colliding {
+    if x &gt; default_position{
+        x -= x_corr; 
+    }
+    else if x &lt; default_position{
+        x+= x_corr;
+    }
 }
 </string>
           </argument>

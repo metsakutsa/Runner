@@ -65,6 +65,7 @@ image_speed = 0;
 
 if global.game_state == "PLAYING"{
     x -= o_floor_spawner.hsp;
+
 }
 </string>
           </argument>

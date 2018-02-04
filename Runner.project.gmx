@@ -17,6 +17,7 @@
   <scripts name="scripts">
     <script>scripts\draw_text_outline.gml</script>
     <script>scripts\state_change.gml</script>
+    <script>scripts\spawn_obstacle.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_msg</font>
@@ -24,12 +25,18 @@
     <font>fonts\fnt_small</font>
   </fonts>
   <objects name="objects">
-    <object>objects\o_view_controller</object>
-    <object>objects\o_player</object>
-    <object>objects\o_floor</object>
-    <object>objects\o_game_controller</object>
-    <object>objects\o_menu</object>
-    <object>objects\o_floor_spawner</object>
+    <objects name="System">
+      <object>objects\o_menu</object>
+      <object>objects\o_view_controller</object>
+      <object>objects\o_game_controller</object>
+      <object>objects\o_floor_spawner</object>
+      <object>objects\o_obstacle_spawner</object>
+    </objects>
+    <objects name="Objects">
+      <object>objects\o_floor</object>
+      <object>objects\o_player</object>
+      <object>objects\o_obstacle</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_opening</room>
