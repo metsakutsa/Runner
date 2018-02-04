@@ -30,7 +30,6 @@
     <object>objects\o_game_controller</object>
     <object>objects\o_menu</object>
     <object>objects\o_floor_spawner</object>
-    <object>objects\obj_platform</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_opening</room>

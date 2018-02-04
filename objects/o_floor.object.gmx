@@ -64,10 +64,6 @@ image_speed = 0;
             <string>///Move floor
 
 if global.game_state == "PLAYING"{
-    if o_floor_spawner.hsp &lt; o_floor_spawner.hsp_max {
-        o_floor_spawner.hsp += o_floor_spawner.hsp_r; 
-    }
-    
     x -= o_floor_spawner.hsp;
 }
 </string>

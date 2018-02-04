@@ -150,12 +150,13 @@ draw_set_font(fnt_small);
 draw_set_color(c_white);
 draw_set_halign(fa_left);
 
-draw_text(10,30,"CURRENT: " + global.game_state);
-draw_text(10,60,"PREVIOUS: " + global.previous_state);
+draw_text(10,30,"STATE: " + global.game_state);
+draw_text(10,60,"PREV: " + global.previous_state);
 
 
-draw_set_halign(fa_middle);
-draw_text(room_width/2,room_height-30,"DISTANCE: " + string(global.distance));
+draw_set_halign(fa_right);
+draw_text(window_get_width()-10,30,"DISTANCE: " + string(global.distance));
+draw_text(window_get_width()-10,60,"SPEED: " + string(o_floor_spawner.hsp));
 
 </string>
           </argument>

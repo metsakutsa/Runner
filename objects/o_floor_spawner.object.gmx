@@ -31,10 +31,41 @@
 hsp = 0;
 
 //Acceleration
-hsp_r = 0.001;
+hsp_r = 0.2;
 
 //Max speed
 hsp_max = 10;
+
+acceleration = room_speed;
+alarm[0] = acceleration;
+hold_alarm = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Increase room speed every second
+
+hsp += hsp_r;
+
+alarm[0] = room_speed;
 </string>
           </argument>
         </arguments>
@@ -62,11 +93,45 @@ hsp_max = 10;
 with o_floor {
     if last{    
         if bbox_right &lt; room_width and !place_meeting(bbox_right+1,y,o_floor){
-            show_debug_message("Hei")
             fl = instance_create(bbox_right+16, y, o_floor);
             fl.last = true;
             last = false;
         }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Speed management
+/*
+if global.game_state == "PAUSED"{
+    hold_alarm = alarm[0];
+    alarm[0] = 0;
+}
+
+if global.game_state == "PLAYING"{
+    if hold_alarm &gt; 0 {
+        alarm[0] = hold_alarm;
+        hold_alarm = 0;
+    } else {
+        alarm[0] = acceleration;
     }
 }
 </string>
