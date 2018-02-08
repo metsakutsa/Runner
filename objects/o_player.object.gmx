@@ -51,7 +51,10 @@ colliding = false;
 attacking = false;
 
 //Attack cooldown in seconds
-cooldown = 0.3;
+cooldown = 0.4;
+
+//Scoring
+points = 0;
 </string>
           </argument>
         </arguments>
@@ -177,18 +180,20 @@ if global.game_state == "PLAYING"{
             <kind>1</kind>
             <string>///Obstacle collision and reset from collision
 
-if place_meeting(bbox_right+1,y,o_obstacle){
-    colliding = true;
-    x = o_obstacle.x-32;
-    x -= o_floor_spawner.hsp;
-} else colliding = false;
-
-if !colliding {
-    if x &gt; default_position{
-        x -= x_corr; 
-    }
-    else if x &lt; default_position{
-        x+= x_corr;
+if global.game_state == "PLAYING"{
+    if place_meeting(bbox_right+1,y,o_obstacle){
+        colliding = true;
+        x = o_obstacle.x-32;
+        x -= o_floor_spawner.hsp;
+    } else colliding = false;
+    
+    if !colliding {
+        if x &gt; default_position{
+            x -= x_corr; 
+        }
+        else if x &lt; default_position{
+            x+= x_corr;
+        }
     }
 }
 </string>
@@ -215,7 +220,7 @@ if !colliding {
             <kind>1</kind>
             <string>///Attack!!!
 
-if !attacking{
+if !attacking and global.game_state == "PLAYING"{
     if !instance_exists(o_player_attack){
         instance_create(x+32,y,o_player_attack);
     }

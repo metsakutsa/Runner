@@ -144,7 +144,7 @@ if global.game_state == "PAUSED"{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///State overview and distance
+            <string>///Score and state and stuff
 
 draw_set_font(fnt_small);
 draw_set_color(c_white);
@@ -161,6 +161,9 @@ draw_text(window_get_width()-10,60,"SPEED: " + string(o_floor_spawner.hsp));
 if instance_exists(o_obstacle_spawner){
     draw_text(window_get_width()-10,90,"SPAWN: " + string(o_obstacle_spawner.alarm[0]));
 }
+
+draw_set_halign(fa_center);
+draw_text(window_get_width()/2,window_get_height()-10,"SCORE: " + string(o_player.points));
 
 </string>
           </argument>

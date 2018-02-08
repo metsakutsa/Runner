@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>///Create the attack hitbox
 
-alarm[0] = room_speed * 0.3;
+alarm[0] = room_speed * 0.1;
 </string>
           </argument>
         </arguments>
