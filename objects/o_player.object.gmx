@@ -95,7 +95,6 @@ points = 0;
 
 //Is hit flag
 is_hit = false;
-
 </string>
           </argument>
         </arguments>
@@ -147,31 +146,6 @@ ds_list_destroy(healthbar);
 
 is_hit = false;
 image_alpha = 1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Reset attacking after cooldown
-
-attacking = false;
 </string>
           </argument>
         </arguments>
@@ -360,6 +334,33 @@ for (i = 0; i &lt; hp_max; i++){
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Attack animation end
+
+if attacking {
+    attacking = false;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -380,7 +381,10 @@ for (i = 0; i &lt; hp_max; i++){
             <string>///Animation
 
 if global.game_state == "PLAYING" {
-    if vsp &gt; 0 {
+
+    if attacking{
+        image_speed = 0.3;
+    } else if vsp &gt; 0 {
         image_speed = 0;
         sprite_index = spr_player_jump;
         image_index = 3;
@@ -393,7 +397,9 @@ if global.game_state == "PLAYING" {
         sprite_index = spr_player_jump;
         image_index = 2;
     
-    } else{
+
+    
+    }else {
         sprite_index = spr_player_run;
         image_speed = 0.08;
     }
@@ -455,10 +461,12 @@ if is_hit {
 
 if !attacking and global.game_state == "PLAYING"{
     if !instance_exists(o_player_attack){
-        instance_create(bbox_right + 32,y,o_player_attack);
+        instance_create(bbox_right,y,o_player_attack);
     }
     attacking = true;
-    alarm[0] = room_speed * cooldown;
+    sprite_index = spr_player_light_attack;
+    image_index = 0;
+
 }
 </string>
           </argument>
