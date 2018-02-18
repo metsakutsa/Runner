@@ -28,13 +28,13 @@
             <string>///Initialize variables
 
 //Speed
-hsp = 0;
+hsp = 2;
 
 //Acceleration
-hsp_r = 0.25;
+hsp_r = 0.1;
 
 //Max speed
-hsp_max = 10;
+hsp_max = 20;
 
 acceleration = room_speed;
 alarm[0] = acceleration;
@@ -93,7 +93,7 @@ if global.game_state == "PLAYING"{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Spawn new floor
+            <string>///Spawn new floor and increase player score for every tile ran
 
 with o_floor {
     if last{    
@@ -102,6 +102,7 @@ with o_floor {
             fl.last = true;
             fl.image_xscale = 5;
             last = false;
+            o_player.points += 0.01;
         }
     }
 }

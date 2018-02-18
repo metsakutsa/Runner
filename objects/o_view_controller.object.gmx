@@ -78,7 +78,7 @@ y += (o_player.y - y) * 0.1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw the UI
+            <string>///Draw the pause and game over messages
 
 draw_set_font(fnt_msg);
 draw_set_color(c_white);
@@ -146,24 +146,13 @@ if global.game_state == "PAUSED"{
             <kind>1</kind>
             <string>///Score and state and stuff
 
-draw_set_font(fnt_small);
+draw_set_font(fnt_msg);
 draw_set_color(c_white);
-draw_set_halign(fa_left);
-
-draw_text(10,30,"STATE: " + global.game_state);
-draw_text(10,60,"PREV: " + global.previous_state);
-
-
 draw_set_halign(fa_right);
-draw_text(window_get_width()-10,30,"DISTANCE: " + string(global.distance));
-draw_text(window_get_width()-10,60,"SPEED: " + string(o_floor_spawner.hsp));
 
-if instance_exists(o_obstacle_spawner){
-    draw_text(window_get_width()-10,90,"SPAWN: " + string(o_obstacle_spawner.alarm[0]));
-}
+draw_text(view_wport[0] - 32, 32,"SCORE: " + string_format(o_player.points * 100,0,0));
 
-draw_set_halign(fa_center);
-draw_text(window_get_width()/2,window_get_height()-10,"SCORE: " + string(o_player.points));
+
 
 </string>
           </argument>

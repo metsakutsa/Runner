@@ -29,6 +29,9 @@
 
 //Points for destroying
 points = 1;
+
+// Jumped flag
+jumped = false;
 </string>
           </argument>
         </arguments>
@@ -102,11 +105,37 @@ if global.game_state == "PLAYING"{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Contact with player attack
+            <string>///Give points when player attacks
 
 if place_meeting(x,y,o_player_attack){
     instance_destroy();
     o_player.points += points;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Give points when player jumps over ground obstacle
+
+if x &lt; o_player.bbox_left and not jumped and place_meeting(x,y+1,o_floor) and o_player.is_hit=false{
+    jumped = true;
+    o_player.points += points*4/5;
 }
 </string>
           </argument>
